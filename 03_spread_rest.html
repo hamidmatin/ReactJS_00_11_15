@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+    <p id="p6"></p>
+    <p id="p7"></p>
+    <p id="p8"></p>
+    <p id="p9"></p>
+    <p id="p10"></p>
+    <p id="p11"></p>
+    <p id="p12"></p>
+    <p id="p13"></p>
+
+    <script>
+      let list1 = [1, 2, 3, 4, 5, 6];
+
+      /*
+        let list2
+        Object.assign(list2, list1)
+      */
+      /****** Copy with spread => ... ***********/
+      // let list2 = list1;
+
+      // let list2 = []
+      // for (const item of list1) {
+      //   list2.push(item)
+      // }
+      let list2 = [...list1]
+      list1[1] = 200;
+      list2[3] = 400;
+      document.getElementById('p1').innerHTML = `list1 = ${list1}`;
+      document.getElementById('p2').innerHTML = `list2 = ${list2}`;
+
+      let list3 = [...list2, 500, 600, 700];
+      document.getElementById('p3').innerHTML = `list3 = ${list3}`;
+
+      let list4 = [100, 200, 300, ...list2];
+      document.getElementById('p4').innerHTML = `list4 = ${list4}`;
+
+      let list5 = [100, 200, 300, ...list2, 500, 600, 700];
+      document.getElementById('p5').innerHTML = `list5 = ${list5}`;
+
+      let list6 = [...list1, ...list4];
+      document.getElementById('p6').innerHTML = `list6 = ${list6}`;
+
+      let p1 = {
+        firstName: 'Mohammad Mehdi',
+        lastName: 'Amiri',
+      };
+
+      let p2 = { ...p1 };
+      p2.lastName = 'Moallemi';
+      document.getElementById('p7').innerHTML = `${p1.firstName} ${p1.lastName}`;
+      document.getElementById('p8').innerHTML = `${p2.firstName} ${p2.lastName}`;
+
+      /*
+        let p3 = {...p2}
+        p3.age = 30
+      */
+      let p3 = { ...p2, age: 30 };
+      document.getElementById('p9').innerHTML = `${p3.firstName} ${p3.lastName} ${p3.age}`;
+
+      let p4 = { ...p3, age: 25 };
+      /*
+        let p4 = {...p3}
+        p4.age = 25
+      */
+      document.getElementById('p10').innerHTML = `${p4.firstName} ${p4.lastName} ${p4.age}`;
+
+      let p5 = { age: 25, ...p3 };
+      /*
+        let p5 = {age: 25}
+
+        p5.firstName = 'Mohammad Mehdi'
+        p5.lastName = 'Moallemi'
+        p5.age = 30
+      */
+
+      p5.firstname = 'alkfhakf';
+      document.getElementById('p11').innerHTML = `${p5.firstName} ${p5.lastName} ${p5.age}`;
+
+      /*************/
+      let id = 5;
+      let name = 'Sajad';
+
+      let student1 = {
+        id: id,
+        name: name,
+      };
+
+      console.log(student1);
+      let student2 = {
+        id,
+        name,
+      };
+      console.log(student2);
+
+      /* dynamic property name */
+      let propertyName = 'firstName';
+      let student3 = {
+        id,
+        [propertyName]: name,
+      };
+      console.log(student3);
+
+      /************* rest *********/
+      const sum = function (list) {
+        let sum = 0;
+        for (const item of list) {
+          sum += item;
+        }
+        return sum;
+      };
+
+      let sumOfList3 = sum(list3);
+      document.getElementById('p12').innerHTML = `sum of list3 = ${sumOfList3}`;
+
+      const sumWithRest = function (...list) {
+        let sum = 0;
+        for (const item of list) {
+          sum += item;
+        }
+        return sum;
+      };
+
+      let sum4 = sumWithRest(1, 2, 44, 545, 54, 89, 6, 5);
+      document.getElementById('p13').innerHTML = `sum4 = ${sum4}`;
+    </script>
+  </body>
+</html>

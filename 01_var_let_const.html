@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+    <p id="p6"></p>
+    <p id="p7"></p>
+    <p id="p8"></p>
+    <p id="p9"></p>
+    <p id="p10"></p>
+    <p id="p11"></p>
+    <p id="p12"></p>
+    <p id="p13"></p>
+    <p id="p14"></p>
+    <p id="p15"></p>
+    <p id="p16"></p>
+    <p id="p17"></p>
+    <p id="p18"></p>
+    <p id="p19"></p>
+    <p id="p20"></p>
+    <script>
+      /*
+        var identifier;
+        let identifier;
+        const identifier;
+      */
+
+      var x = 10;
+      document.getElementById('p1').innerHTML = x; 
+      
+
+
+      // Redeclare
+      var x = 'Hamid';
+      document.getElementById('p2').innerHTML = x; 
+      
+      let y = 20;
+      document.getElementById('p3').innerHTML = y;
+      
+      // let y = 30;
+      document.getElementById('p4').innerHTML = y;
+      
+      // let x = 30;
+      
+      if(true){
+        var z = 10;
+        let u = 10
+        document.getElementById('p5').innerHTML = 'z = ' + z;
+        document.getElementById('p8').innerHTML = 'u = ' + u;
+
+        if(true){
+          console.log(w)
+          w = 20
+          console.log(w)
+
+          // v = 10
+          // console.log(v)
+
+          z += 30;
+          u += 20;
+          document.getElementById('p6').innerHTML = 'z = ' + z;
+          document.getElementById('p9').innerHTML = 'u = ' + u;
+
+          var w = 10;
+          let v = 30
+        }
+        document.getElementById('p7').innerHTML = 'w = ' + w;
+        // document.getElementById('p10').innerHTML = 'v = ' + v;
+      }
+      
+      let r = 5;
+      let pic = ''
+      // let pi = 3.141592653589793;
+      const PI = 3.141592653589793;
+
+      pic = 'Image.png'
+      
+      let area = r ** 2 * PI;
+      
+      
+      document.getElementById('p11').innerHTML = 'area = ' + area;
+    </script>
+  </body>
+</html>

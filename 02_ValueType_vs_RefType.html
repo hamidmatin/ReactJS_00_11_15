@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+    <p id="p6"></p>
+
+    <script>
+      let a;
+      a = 20;
+      let b;
+      b = a;
+
+      a = 30;
+
+    document.getElementById('p1').innerHTML = `a = ${a}, b = ${b}`;
+
+      let list1
+      list1 = [1, 2, 3, 4];
+      let list2
+      list2 = list1;
+
+      list1[1] = 200;
+      
+      document.getElementById('p2').innerHTML = `list1 = ${list1} <br> list2 = ${list2}`;
+      list2[3] = 500;
+      document.getElementById('p3').innerHTML = `list1 = ${list1} <br> list2 = ${list2}`;
+
+      let person1 = {firstName: 'Hamid', lastName: 'Matin'}
+      let person2 = person1
+
+      person1.firstName = 'Hamid Reza'
+
+      document.getElementById('p4').innerHTML = `person1 = ${person1.firstName} ${person1.lastName} <br>
+                                                 person2 = ${person2.firstName} ${person2.lastName}`
+
+      person2.lastName = 'Izadi Matin'
+      document.getElementById('p5').innerHTML = `person1 = ${person1.firstName} ${person1.lastName} <br>
+                                                 person2 = ${person2.firstName} ${person2.lastName}`
+      </script>
+  </body>
+</html>
