@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#">Menu 1</a></li>
+        <li><a href="#" class="active">Menu 2</a></li>
+        <li><a href="#">Menu 3</a></li>
+        <li><a href="#">Menu 4</a></li>
+        <li><a href="#">Menu 5</a></li>
+      </ul>
+    </nav>
+    <div class="row">
+      <aside>
+        <ul>
+          <li><a id="ajax-1" href="#">AJAX Intro</a></li>
+          <li><a id="ajax-1-1" href="#">AJAX Intro - onload</a></li>
+          <li><a id="ajax-2" href="#">AJAX XMLHttp</a></li>
+          <li><a id="ajax-3" href="#" class="active">Breakfast Menu</a></li>
+          <li><a id="ajax-4" href="#">Get Data With XML</a></li>
+        </ul>
+      </aside>
+      <main></main>
+    </div>
+
+    <script>
+      /**********
+        XMLHttpRequest => ajax class
+        obj = new XMLHttpRequest()
+        obj.open('method', 'url', async:boolean)
+          method =>
+            'GET'       => Get data from server
+            'POST'      => new data send to server
+            'PUT',      => update a data at server
+            'PATCH'     => update a filed
+            'DELETE'    => delete a data
+       
+        obj.send([data])
+        obj.readyState
+          Holds the status of the XMLHttpRequest.
+          0: request not initialized
+          1: server connection established
+          2: request received
+          3: processing request
+          4: request finished and response is ready
+
+        obj.onreadystatechange (event)	Defines a function to be called when 
+                                        the readyState property changes
+        obj.status
+          200: "OK"
+          403: "Forbidden"
+          404: "Page not found"
+          ... for more info https://www.w3schools.com/tags/ref_httpmessages.asp
+
+        obj.responseText
+        obj.responseXML
+
+      */
+
+      /*********** Set Active Class ************/
+      const setActiveClass = function (currentLink) {
+        let asideLinks = document.querySelectorAll('aside ul a');
+        
+        for(let asideLink of asideLinks){
+          asideLink.classList.remove('active')
+        }
+
+        currentLink.classList.add('active');
+      };
+      /*********/
+      document.getElementById('ajax-1').onclick = function (e) {
+        e.preventDefault();
+        setActiveClass(this);
+        /**************/
+
+        const xhttp = new XMLHttpRequest();
+
+        console.log(`readyState = ${xhttp.readyState}, status = ${xhttp.status}`);
+
+        xhttp.onreadystatechange = function () {
+          console.log(`readyState = ${this.readyState}, status = ${this.status}`);
+
+          if (this.readyState === 4 && this.status === 200) {
+            console.log(this.responseText);
+            document.querySelector('main').innerHTML = this.responseText;
+          }
+        };
+
+        xhttp.open('GET', '/partial_pages/js_ajax_intro.txt', true);
+        xhttp.send();
+      };
+
+      /*********************/
+      document.getElementById('ajax-1-1').onclick = function(e){
+        e.preventDefault();
+        setActiveClass(this)
+        /************/
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+          console.log(`readyState = ${this.readyState}, status = ${this.status}`);
+          if (this.readyState === 4 && this.status === 200) {
+            console.log(this.responseText);
+            document.querySelector('main').innerHTML = this.responseText;
+          }
+        }
+        xhttp.open('GET', '/partial_pages/js_ajax_http.txt', true);
+        xhttp.send();
+      }
+      /*********************/
+      document.getElementById('ajax-2').onclick = function (e) {
+        e.preventDefault();
+        setActiveClass(this);
+        /**************/
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('GET', '/partial_pages/js_ajax_http_send.txt', true);
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            console.log(this.responseText);
+            document.querySelector('main').innerHTML = this.responseText;
+          }
+        };
+      };
+
+      document.getElementById('ajax-3').onclick = function (e) {
+        e.preventDefault();
+        setActiveClass(this);
+
+        /********************/
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('GET', '/data/breakfast_menu.xml', true);
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+          if ((this.readyState === 4) & (this.status === 200)) {
+            console.log(this.responseText);
+            console.log(this.responseXML);
+
+            let foodList = '<ul>';
+            const foods = this.responseXML.querySelectorAll('food');
+            for (const food of foods) {
+              console.log(food.querySelector('name').innerHTML);
+              foodList += `<li>${food.querySelector('name').innerHTML}
+                              <ul>
+                                <li>price = ${food.querySelector('price').innerHTML}</li>
+                                <li>description = ${food.querySelector('description').innerHTML}</li>
+                                <li>calories = ${food.querySelector('calories').innerHTML}</li>
+                              </ul>
+                            </li>`;
+            }
+
+            foodList += '</ul>';
+            
+            document.querySelector('main').innerHTML = foodList;
+          }
+        };
+      };
+
+      /* Food cnstructor function */
+      const Food = function (name, price, description, calories) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.calories = calories;
+      };
+
+      /** globall food list array */
+      let foodList = [];
+
+      /* dfdfd */
+      const fillFoodList = function (foodsXML) {
+        /* clear foodList array*/
+        foodList = []
+
+        for (const foodXML of foodsXML) {
+          /*  read properties */
+          let name = foodXML.querySelector('name').innerHTML;
+          let price = parseFloat(foodXML.querySelector('price').innerHTML);
+          let description = foodXML.querySelector('description').innerHTML;
+          let calories = parseInt(foodXML.querySelector('calories').innerHTML);
+
+          /* create food object */
+          const food = new Food(name, price, description, calories);
+
+          foodList.push(food);
+        } 
+      };
+
+      document.getElementById('ajax-4').onclick = function (e) {
+        e.preventDefault();
+        setActiveClass(this);
+
+        /*****************/
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('GET', '/data/breakfast_menu.xml', true);
+        xhttp.send();
+
+        xhttp.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            /****** Convert to array of object ***********/
+            const foodsXML = this.responseXML.querySelectorAll('food');
+
+            fillFoodList(foodsXML);
+
+            showFoods();
+          }
+        };
+      };
+      /********/
+      const showFoods = function () {
+        let headerFood = `
+              <div>
+                <button onclick="sortByName()">Sort By Name</button>
+                <button onclick="sortByPrice()">Sort By Price</button>
+                <button onclick="sortByCalories()">Sort By Calories</button>
+              </div>
+            `;
+        let foodListElement = '<ul>';
+        for (const food of foodList) {
+          foodListElement += `<li>${food.name}
+                                <ul>
+                                  <li>price = ${food.price}</li>
+                                  <li>description = ${food.description}</li>
+                                  <li>calories = ${food.calories}</li>
+                                </ul>
+                              </li>`;
+        }
+
+        foodListElement += '</ul>';
+
+        document.querySelector('main').innerHTML = headerFood + foodListElement;
+      };
+
+      /***/
+      const sortByName = function () {
+        foodList.sort(function (f1, f2) {
+          if (f1.name > f2.name) return 1;
+          else if (f1.name < f2.name) return -1;
+          else return 0;
+        });
+
+        showFoods();
+      };
+      /***/
+      const sortByPrice = function () {
+        foodList.sort(function (f1, f2) {
+          return f1.price - f2.price
+        });
+
+        showFoods();
+      };
+      /***/
+      const sortByCalories = function () {
+        foodList.sort(function (f1, f2) {
+          return f1.calories - f2.calories
+        });
+
+        showFoods();
+      };
+    </script>
+  </body>
+</html>

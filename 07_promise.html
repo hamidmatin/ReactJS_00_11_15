@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"></p>
+    <script>
+      setTimeout(() => {
+        alert('Time out');
+      }, 10000);
+
+
+      const doSomething = () => {
+        for (let i = 0; i < 1000000000; i++) {
+          //
+        }
+        
+      };
+
+      var a = 10;
+      doSomething();
+      alert('Do something Finished');
+
+      let myPromise = new Promise((myResolve, myReject) =>{
+        let result, error;
+        let successful = true
+        // "Producing Code" (May take some time)
+        // change successfull to true or false
+
+        // راه اول
+        // if(successful){
+        //   myResolve(result); // when successful
+        // }
+        // else{
+        //   myReject(error); // when error
+        // }
+
+
+        // راه دوم
+        try{
+          // "Producing Code" (May take some time)
+          myResolve(result); // when successful
+        }
+        catch(error){
+          myReject(error); // when error
+        }
+      });
+
+      // روش اول
+      // "Consuming Code" (Must wait for a fulfilled Promise)
+      myPromise.then(
+        function (value) {
+          /* code if successful */
+        },
+        function (error) {
+          /* code if some error */
+        }
+      );
+
+      // روش دوم
+      myPromise.then(
+        function (value) {
+          /* code if successful */
+        }
+      ).catch(
+        function (error) {
+          /* code if some error */
+        }
+      )
+    </script>
+  </body>
+</html>

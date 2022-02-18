@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+      nav {
+        background-color: orangered;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      nav ul a {
+        color: white;
+        display: block;
+        text-decoration: none;
+        padding: 16px 24px;
+        position: relative;
+        transition: all 0.2s;
+      }
+      nav ul a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 5px;
+        width: 100%;
+        transform: scale(0);
+        transform-origin: top center;
+        background-color: darkblue;
+        transition: all 0.2s;
+      }
+      nav ul a:hover,
+      nav ul a.active {
+        color: darkblue;
+      }
+      nav ul a:hover::after,
+      nav ul a.active::after {
+        transform: scale(1);
+      }
+
+      main {
+        padding: 16px;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+      }
+      .card-wrapper {
+        width: 33%;
+        padding: 1em;
+      }
+      .card-wrapper .card {
+        padding: 16px;
+        border: 1px solid #eee;
+        box-shadow: 0 4px 4px -2px #bbbbbb;
+      }
+
+      .hide {
+        display: none !important;
+      }
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+
+        background-color: rgba(0, 0, 0, 0.301);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .loading div {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        border: 10px solid orangered;
+        border-bottom-color: transparent;
+        animation: loading 1s infinite linear;
+      }
+
+      @keyframes loading {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading hide">
+      <div></div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" class="users">Users</a></li>
+        <li><a href="#" class="posts">Posts</a></li>
+        <li><a href="#" class="todos">Todos</a></li>
+      </ul>
+    </nav>
+    <main></main>
+    <script>
+      const setActiveNavLink = function (currentItem) {
+        const navLinks = document.querySelectorAll('nav a');
+        // console.log(navLinks)
+        for (const navLink of navLinks) {
+          navLink.classList.remove('active');
+        }
+        currentItem.classList.add('active');
+      };
+
+      const showLoading = function () {
+        document.querySelector('.loading').classList.remove('hide');
+      };
+      const hideLoading = function () {
+        document.querySelector('.loading').classList.add('hide');
+      };
+
+      const showUsers = function (users) {
+        // console.log(users)
+        const mainElement = document.querySelector('main');
+
+        let row = '<div class="row">';
+        users.forEach(function (user) {
+          // console.log(user)
+          row += `
+            <div class="card-wrapper">
+              <div class="card">
+                <h3>${user.name}</h3>
+                <div>user name: ${user.username}</div>
+                <div>E-Mail: ${user.email}</div>
+                <div>
+                  <a class="postBt" data-id=${user.id} href="#" 
+                    >Posts</a>
+                  <button onclick="showUserPost(${user.id})">Posts</button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        row += '</div>';
+
+        mainElement.innerHTML = row;
+
+        const postBts = document.querySelectorAll('.card-wrapper .postBt');
+        for (const posBt of postBts) {
+          // console.log(posBt)
+          posBt.onclick = function(e){
+            e.preventDefault()
+            const newElement = document.createElement('b');
+            newElement.innerHTML = this.dataset.id;
+            this.parentElement.parentElement.after(newElement)
+          }
+        }
+      };
+
+      /**********************/
+      const showUserPost = function(id){
+        // document.getElementById().parentElement.after()
+        console.log(id)
+        /***** ajax ******/
+
+        /***** ajax *******/
+        // const newElement = document.createElement('b');
+        // newElement.innerHTML = 'kjgs dsgd ks';
+        // current.parentElement.parentElement.after(newElement)
+      }
+      /****************/
+      
+      /***************************/
+      document.querySelector('nav .users').onclick = function (e) {
+        // console.log(e)
+        e.preventDefault();
+
+        setActiveNavLink(this);
+
+        showLoading();
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('GET', 'https://jsonplaceholder.typicode.com/users', true);
+        xhttp.send();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            showUsers(JSON.parse(this.responseText));
+            hideLoading();
+          }
+        };1
+      };
+
+      /**************************/
+      document.querySelector('nav .posts').onclick = function (e) {
+        // console.log(e)
+        e.preventDefault();
+        setActiveNavLink(this);
+        document.querySelector('main').innerHTML = '';
+      };
+      document.querySelector('nav .todos').onclick = function (e) {
+        // console.log(e)
+        e.preventDefault();
+        setActiveNavLink(this);
+      };
+    </script>
+  </body>
+</html>

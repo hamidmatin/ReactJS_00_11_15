@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Sample</title>
+  
+
+</head>
+<body>
+  <div id="root1"></div>
+  <div id="root2"></div>
+  <div id="root3"></div>
+  <div id="root4"></div>
+  <div id="root5"></div>
+  <div id="root6"></div>
+  <div id="root7"></div>
+  <div id="root8"></div>
+  
+
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const root1 = document.getElementById('root1');
+    const root2 = document.getElementById('root2');
+    const root3 = document.getElementById('root3');
+    const root4 = document.getElementById('root4');
+    const root5 = document.getElementById('root5');
+    const root6 = document.getElementById('root6');
+    const root7 = document.getElementById('root7');
+    const root8 = document.getElementById('root8');
+
+
+    const reactElement1 = React.createElement('h1', null, 'Hello React');
+    console.log(reactElement1);
+    // ReactDOM.render(reactElement, jsElement)
+    ReactDOM.render(reactElement1, root1);
+
+    const jsxElement2 = <h2>Hello React with JSX</h2>;
+    // ReactDOM.render(jsxElement, jsElement)
+    ReactDOM.render(jsxElement2, root2);
+
+    const jsxElement3 = <div><h2>Hello React with JSX</h2><p>Session 2</p></div>;
+      ReactDOM.render(jsxElement3, root3);
+
+      const jsxElement4 =(
+        <div>
+          <h2>Hello React with JSX</h2>
+          <p>Session 3</p>
+        </div>);
+      ReactDOM.render(jsxElement4, root4);
+
+      // Fragment Element => <></>
+      const jsxElement5 =( 
+        <>
+          <h2>Hello React with JSX</h2>
+          <p>Session 3</p>
+        </>);
+      ReactDOM.render(jsxElement5, root5);
+
+      let sessionNumber = 3;
+      const description = (
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam iusto dolore dolorum
+          mollitia voluptatum maiores deserunt sint eum! Similique blanditiis minus a! Dolorem sunt
+          quae harum, ad facilis temporibus vel.
+        </p>
+      );
+
+      const jsxElement6 =( 
+        <>
+          <h2>Hello React with JSX</h2>
+          <p>Session {sessionNumber}</p>
+          <hr />
+          {description}
+        </>);
+      ReactDOM.render(jsxElement6, root6);
+
+      // Using CSS in JSX
+
+      let myClass = 'center'
+      let borderWidth = '4px'
+      const borderBottomStyle = {
+        borderBottom: `${borderWidth} solid red`
+      }
+      const fontWightBold = {
+        fontWeight: '900',
+      }
+      const sessionStyle = {
+        color: '#555',
+        fontSize: '1.5em',
+        ...fontWightBold,
+        ...borderBottomStyle
+      }
+      const descriptionWithStyle = (
+        <p style={{padding: '50px'}}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam iusto dolore dolorum
+          mollitia voluptatum maiores deserunt sint eum! Similique blanditiis minus a! Dolorem sunt
+          quae harum, ad facilis temporibus vel.
+        </p>
+      );
+
+      const jsxElement7 =( 
+        <>
+          <h2 className='title center' style={borderBottomStyle}>Hello React with JSX</h2>
+          <p className={myClass} style={sessionStyle}>Session {sessionNumber}</p>
+          <hr />
+          {descriptionWithStyle}
+        </>);
+      ReactDOM.render(jsxElement7, root7);
+  </script>
+</body>
+</html>

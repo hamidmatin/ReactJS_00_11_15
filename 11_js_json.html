@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      
+      const student = {
+        firstName: 'Farjad',
+        lastName: 'Babapour',
+        nationalCode: '23236562',
+        age: 35,
+        course: {
+          name: 'Web Design',
+          duration: 90,
+        },
+      };
+
+      let studentXML = `<?xml version="1.0" encoding="UTF-8"?>
+                        <student>
+                          <firstName>${student.firstName}</firstName>
+                          <lastName>${student.lastName}</lastName>
+                          <nationalCode>${student.nationalCode}</nationalCode>
+                          <age>${student.age}</age>
+                          <course>
+                            <name>${student.course.name}</name>
+                            <duration>${student.course.duration}</duration>
+                          </course>
+                        </student>`;
+
+      
+      const student_JSON = `{
+          "firstName": "${student.firstName}",
+          "lastName": "${student.lastName}",
+          "nationalCode": "${student.nationalCode}",
+          "age": ${student.age},
+          "course": {
+            "name": "${student.course.name}",
+            "duration": ${student.course.duration}
+          }
+        }`;
+
+      /************
+        string JSON = JSON.stringify(js object); => convert object to json
+        js object = JSON.parse(string JSON); => convert json to object
+      *********/
+
+      console.log(student)
+      console.log(student_JSON)
+      console.log(JSON.parse(student_JSON))
+      console.log(JSON.stringify(student))
+
+    </script>
+  </body>
+</html>

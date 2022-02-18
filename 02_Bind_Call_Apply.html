@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn1">Click Me</button>
+    <button id="btn2">Click Me</button>
+    <button id="btn3" onclick="clickHandler('p2', 'Button 2')">Click Me</button>
+    <button id="btn4">Click Me</button>
+    <button id="btn5">Click Me</button>
+    <button id="btn6">Click Me</button>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+    <p id="p6"></p>
+    <p id="p7"></p>
+    <p id="p8"></p>
+    <p id="p9"></p>
+    <p id="p10"></p>
+    <p id="p11"></p>
+
+    <script>
+      const clickHandler = () => {
+        document.getElementById('p1').innerHTML = 'Clicked, Without Parameter';
+      };
+      document.getElementById('btn1').onclick = clickHandler;
+
+      const clickHandlerWithEventParameter = (e) => {
+        console.log(e);
+        document.getElementById('p2').innerHTML = 'Clicked, With Event Parameter';
+      };
+      document.getElementById('btn2').onclick = clickHandlerWithEventParameter;
+
+      const clickHandlerWithParameter = (id, message, e) => {
+        console.log(e);
+        console.log(this);
+        document.getElementById(id).innerHTML = 'Clicked, ' + message;
+      };
+      
+      // راه اول
+      document.getElementById('btn3').onclick = (e) => {
+        clickHandlerWithParameter('p3', 'With Parameter', e);
+      };
+
+      document.getElementById('btn4').onclick = clickHandlerWithParameter.bind(
+        this,
+        'p4',
+        'With Parameter (bind)'
+      );
+
+      /************* Call ***************/
+      var firstName = 'Global FirstName';
+      var lastName = 'Global LastName';
+
+      var person = {
+        firstName: 'Firstname',
+        lastName: 'Lastname',
+        fullName: function (type = 0) {
+        console.log(this);
+          return type === 0
+            ? this.firstName + ' ' + this.lastName
+            : this.lastName + ', ' + this.firstName;
+        },
+
+        changeName: function (fname, lname) {
+          console.log(this);
+          this.firstName = fname;
+          this.lastName = lname;
+        },
+      };
+
+      var person1 = {
+        firstName: 'John',
+        lastName: 'Doe',
+      };
+
+      var person2 = {
+        firstName: 'Mary',
+        lastName: 'Doe',
+      };
+
+      document.getElementById('p5').innerHTML = person.fullName();
+      console.log(this)
+      document.getElementById('p6').innerHTML = person.fullName.call(this, 0);
+      document.getElementById('p7').innerHTML = person.fullName.call(person1, 0);
+      document.getElementById('p8').innerHTML = person.fullName.call(person2, 1);
+
+      person.changeName.call(person1, 'Alireza', 'Mamaghanian');
+      document.getElementById('p9').innerHTML = person.fullName.call(person1, 0);
+      
+      /************* Apply ***************/
+      /*
+        The Difference Between call() and apply()
+          The call() method takes arguments separately.
+          The apply() method takes arguments as an array.
+      */
+      document.getElementById('p10').innerHTML = person.fullName.apply(person1, [0]);
+
+      person.changeName.apply(person2, ['Aysan', 'Kahbasi']);
+
+      document.getElementById('p11').innerHTML = person.fullName.apply(person2, [1]);
+
+      
+    </script>
+  </body>
+</html>

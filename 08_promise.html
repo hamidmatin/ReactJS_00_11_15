@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn1">Promise 1</button>
+    <button id="btn2">Promise 2</button>
+    <button id="btn3">Promise 3</button>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+
+    <script>
+     
+
+      /*
+        const myPromise = new Promise(function(){});
+        const myPromise = new Promise(() => {......});
+        
+
+       
+        const fn = async ()=>{
+          .....
+          if (successfull){
+            return result
+          }
+          else{
+            throw(errorCode)
+          }
+        }
+        const myPromise = new Promise(fn);
+
+        const myResolve = (data) =>{....}
+        const myReject = (error) =>{....}
+
+        myPromise()
+          .then(myResolve)
+          .catch(myReject)
+
+        myPromise
+          .then(myResolve,myReject)
+        
+        try{
+          let reult = await myPromise()
+        }
+        catch (error){
+          ...
+        }
+      */
+      const doSomething = () => {
+        for (let i = 0; i < 3000000000; i++) {
+          //
+        }
+      };
+      document.getElementById('btn1').onclick = function () {
+        // show message in p1
+        document.getElementById('p1').innerHTML = 'Start Do Somthing';
+
+        // create promise
+        const promise1 = new Promise((resolve) => {
+          doSomething();
+          resolve();
+        });
+
+        promise1.then(() => {
+          document.getElementById('p1').innerHTML = 'Do Somthing Finished';
+        });
+      };
+
+      /******************/
+      document.getElementById('btn2').onclick = function () {
+        document.getElementById('p2').innerHTML = 'Start Timing';
+        const promise2 = new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 5000);
+        });
+
+        promise2.then(() => {
+          document.getElementById('p2').innerHTML = 'Time Out';
+        });
+      };
+
+      /*******************/
+      document.getElementById('btn3').onclick = function () {
+        const promise3 = new Promise((reolve, reject) => {
+
+          // let rnd = Math.ceil(Math.random() * 6);
+
+          // if (rnd === 6 || rnd === 3) {
+          //   reolve(rnd);
+          // } else {
+          //   reject('try again');
+          // }
+
+          try {
+            let rnd = Math.ceil(Math.random() * 6);
+            
+            switch (rnd) {
+              case 3:
+              case 6:
+                reolve(rnd);
+                break;
+              default:
+                throw 'try again'
+                break;
+            }
+          } catch (error) {
+            reject(error)
+          }
+        });
+
+        // روش اول
+        // promise3.then(
+        //   (result)=>{
+        //     document.getElementById('p3').innerHTML = `Hooray your number is ${result}`;
+        //   },
+        //   (error)=>{
+        //     document.getElementById('p3').innerHTML = `You loose ${error}`;
+        //   });
+
+        // روش دوم
+        promise3
+          .then((result) => {
+            document.getElementById('p3').innerHTML = `Hooray your number is ${result}`;
+          })
+          .catch((error) => {
+            document.getElementById('p3').innerHTML = `You loose ${error}`;
+          });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+    <p id="p6"></p>
+    <p id="p7"></p>
+    <p id="p8"></p>
+    <p id="p9"></p>
+    <p id="p10"></p>
+
+    <script>
+      class Person {
+        #firstName;
+        #lastName;
+        #nationalCode;
+
+        constructor(firstName, lastName, nationalCode) {
+          this.firstName = firstName;
+          this.lastName = lastName;
+          this.nationalCode = nationalCode;
+        }
+
+        get firstName() {
+          return this.#firstName;
+        }
+        set firstName(value) {
+          if (value === '') {
+            throw 'FIRSTNAME_REQUIRED';
+          }
+          this.#firstName = value;
+        }
+
+        get lastName() {
+          return this.#lastName;
+        }
+        set lastName(value) {
+          this.#lastName = value;
+        }
+
+        get nationalCode() {
+          return this.#nationalCode;
+        }
+        set nationalCode(value) {
+          if (value.length !== 10) {
+            throw 'NATIONAL_CODE_LENGTH_ERROR';
+          }
+          this.#nationalCode = value;
+        }
+
+        /* readonly property */
+        get personInfo() {
+          return `${this.firstName} ${this.lastName}, nationa code = ${this.nationalCode}`;
+        }
+      }
+
+      let p1 = null;
+
+      try {
+        p1 = new Person('Shervin', 'Osti', '1232325458');
+      } catch (e) {
+        switch (e) {
+          case 'NATIONAL_CODE_LENGTH_ERROR':
+            alert('کد ملی باید 10 رقم باشد');
+            break;
+          case 'FIRSTNAME_REQUIRED':
+            alert('نام اجباری است');
+        }
+      }
+      document.getElementById('p1').innerHTML = p1.personInfo;
+      p1.lastName = 'Osati';
+      document.getElementById('p2').innerHTML = p1.personInfo;
+
+      class Student extends Person {
+        #learn;
+        constructor(firstName, lastName, nationalCode, learn) {
+          super(firstName, lastName, nationalCode);
+          this.learn = learn; 
+
+        }
+        get fullName() {
+          return `${this.firstName} ${this.lastName}`;
+        }
+
+        get learn() {
+          return this.#learn;
+        }
+
+        set learn(value) {
+          this.#learn = value;
+        }
+      }
+
+      const s1 = new Student('Behnam', 'Rahimi', '1234567890', 'React');
+
+      document.getElementById('p3').innerHTML = `${s1.fullName} learning ${s1.learn}`;
+
+      class Teacher extends Person {
+        #teach;
+        constructor(firstName, lastName, nationalCode, teach) {
+          super(firstName, lastName, nationalCode);
+          this.teach = teach;
+        }
+        get teach() {
+          return this.#teach;
+        }
+
+        set teach(value) {
+          this.#teach = value;
+        }
+      }
+
+      const t1 = new Teacher('Hamidreza', 'Izadi Matin', '9876543210', 'React, Web, C#');
+      document.getElementById('p4').innerHTML = `${t1.personInfo}, teaches '${t1.teach}'`;
+
+      s1.firstName = 'Soheil'
+      s1.lastName = 'Yazdanyar'
+
+      document.getElementById('p5').innerHTML = `student = ${s1.fullName}`
+      document.getElementById('p6').innerHTML = `Teacher = ${t1.personInfo}`
+    </script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#">Menu 1</a></li>
+        <li><a href="#" class="active">Menu 2</a></li>
+        <li><a href="#">Menu 3</a></li>
+        <li><a href="#">Menu 4</a></li>
+        <li><a href="#">Menu 5</a></li>
+      </ul>
+    </nav>
+    <div class="row">
+      <aside>
+        <ul>
+          <li><a id="ajax-1" href="#">AJAX Intro</a></li>
+          <li><a id="ajax-2" href="#">AJAX XMLHttp</a></li>
+          <li><a id="ajax-3" href="#" class="active">Breakfast Menu</a></li>
+          <li><a id="ajax-4" href="#">Get Data with JSON</a></li>
+          <li><a id="ajax-5" href="#">Get Data From API</a></li>
+        </ul>
+      </aside>
+      <main></main>
+
+      <script>
+        /** globall food list array */
+        let foodList = [];
+
+        document.getElementById('ajax-4').onclick = function (e) {
+          e.preventDefault();
+
+          let asideLinks = document.querySelectorAll('aside ul a');
+          for (let i = 0; i < asideLinks.length; i++) {
+            asideLinks[i].classList.remove('active');
+          }
+
+          this.classList.add('active');
+          /**********************/
+
+          const xhttp = new XMLHttpRequest();
+          xhttp.open('GET', '/data/breakfast_menu.json', true);
+          xhttp.send();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+              console.log(this.responseText);
+              console.log(this.responseXML);
+
+              foodList = JSON.parse(this.responseText);
+
+              console.log(foodList);
+
+              foodList.sort(function(f1, f2){
+                return f2.price - f1.price
+              })
+              let foodListElement = '<ul>';
+              for (const food of foodList) {
+                foodListElement += `<li>${food.name}
+                                      <ul>
+                                        <li>price = ${food.price}</li>
+                                        <li>description = ${food.description}</li>
+                                        <li>calories = ${food.calories}</li>
+                                      </ul>
+                                    </li>`;
+              }
+
+              foodListElement += '</ul>';
+
+              document.querySelector('main').innerHTML = foodListElement;
+            }
+          };
+        };
+
+        document.getElementById('ajax-5').onclick = function (e) {
+          e.preventDefault();
+
+          let asideLinks = document.querySelectorAll('aside ul a');
+          for (let i = 0; i < asideLinks.length; i++) {
+            asideLinks[i].classList.remove('active');
+          }
+
+          this.classList.add('active');
+          /**********************/
+
+          const xhttp = new XMLHttpRequest();
+          xhttp.open('GET', 'https://jsonplaceholder.typicode.com/users', true);
+          xhttp.send();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+              console.log(this.responseText);
+              console.log(JSON.parse(this.responseText))
+            }
+          }
+
+        
+        }
+      </script>
+    </div>
+  </body>
+</html>

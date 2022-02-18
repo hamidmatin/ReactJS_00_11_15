@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+    <p id="p6"></p>
+    <p id="p7"></p>
+    <p id="p8"></p>
+    <p id="p9"></p>
+    <p id="p10"></p>
+
+    <script>
+      class Student {
+        age = 30;
+        constructor(fname, lname, age) {
+          this.firstName = fname;
+          this.lastName = lname;
+          // this.age = age
+          this.setAge(age)
+        }
+
+        fullName() {
+          // return `${this.firstName} ${this.lastName}, age = ${this.age}`;
+          return `${this.firstName} ${this.lastName}, age = ${this.getAge()}`;
+        }
+
+        setAge(value) {
+          if (value > 0) this.age = value;
+          else throw 'Age is invalid';
+        }
+        getAge() {
+          return this.age;
+        }
+      }
+
+      let st1 = new Student('Mostafa', 'Dastmalchi', 25);
+
+      document.getElementById('p1').innerHTML = st1.fullName();
+
+      // st1.age = 31
+      // st1.age = -31
+      // st1.age = 'sdsd'
+      // st1.setAge(-31)
+      st1.setAge(31);
+      document.getElementById('p2').innerHTML = st1.fullName();
+      document.getElementById('p3').innerHTML = st1.getAge();
+
+      /*
+        st1.age = 31 => set
+        a = st1.age => get
+      */
+
+      class StudentGetSet {
+        _age = 30;
+        constructor(firstName, lastName, age) {
+          this.firstName = firstName;
+          this.lastName = lastName;
+          this.age = age // set
+        }
+
+        fullName() {
+          return `${this.firstName} ${this.lastName}, age = ${this.age}`;
+        }
+
+        // property
+        set age(value) {
+          if (value > 0) this._age = value;
+          else throw 'Age is invalid';
+        }
+        get age() {
+          return this._age;
+        }
+      }
+
+      let st2 = new StudentGetSet('Mostafa', 'Dastmalchi', 25);
+
+      // st2.age = -31
+      st2.age = 31  // set
+      document.getElementById('p4').innerHTML = st2.age; // get
+      
+      document.getElementById('p5').innerHTML = st2.fullName();
+
+      st2._age = -31
+      document.getElementById('p6').innerHTML = st2.fullName()
+
+
+      /***************/
+      class StudentPrivate {
+        #age = 30;  // private property
+        constructor(firstName, lastName) {
+          this.firstName = firstName;
+          this.lastName = lastName;
+        }
+
+        fullName() {
+          return `${this.firstName} ${this.lastName}, age = ${this.age}`;
+        }
+
+        set age(value) {
+          if (value > 0) this.#age = value;
+          else throw 'Age is invalid';
+        }
+        get age() {
+          return this.#age;
+        }
+        
+      }
+
+      let st3 = new StudentPrivate('Mostafa', 'Dastmalchi');
+
+      document.getElementById('p7').innerHTML = st3.fullName();
+      // st3.age = -31
+      st3.age = 31
+      document.getElementById('p8').innerHTML = st3.fullName();
+      // st3.#age = -31
+
+    </script>
+  </body>
+</html>

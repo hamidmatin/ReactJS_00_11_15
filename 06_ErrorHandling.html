@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .error {
+        color: orangered;
+      }
+    </style>
+  </head>
+  <body>
+    Float Number <input id="inp1" type="text" /> decimal point <input id="inp2" type="text" />
+    <div class="error"></div>
+    <hr />
+    <button id="btn1">Point</button>
+    <button id="btn2">Custom Error 1</button>
+    <button id="btn3">Custom Error 2</button>
+    <script>
+      /*
+        try{
+          ....
+        }
+        catch(error){
+
+        }
+        finally{   (optional)
+          
+        }
+      */
+
+      document.getElementById('inp2').onkeydown = function () {
+        document.querySelector('.error').innerHTML = '';
+      };
+
+      document.getElementById('btn1').onclick = function () {
+        try {
+          let num1 = parseFloat(document.getElementById('inp1').value);
+          let num2 = parseFloat(document.getElementById('inp2').value);
+
+          alert(num1.toFixed(num2));
+        } 
+        // catch {
+        //   alert('Raise Error');
+        // }
+        catch (error) {
+          console.log(error);
+          console.log(`Error Name is : ${error.name}`);
+          console.log(`Error Message is : ${error.message}`);
+
+          if (error.name === 'RangeError') {
+            // alert('Decimal Point must be between 0 and 100');
+            document.querySelector('.error').innerHTML = 'Decimal Point must be between 0 and 100';
+            document.getElementById('inp2').focus();
+          }
+        }
+        finally {
+          /*  finally is optional */
+          alert('Finally');
+        }
+      };
+
+      document.getElementById('btn2').onclick = function () {
+        document.querySelector('.error').innerHTML = '';
+        try {
+          let a = parseFloat(document.getElementById('inp1').value);
+
+          if (isNaN(a)){
+            throw 'Enter a Number'
+          }
+          if (a < 0 || a > 10) {
+            throw `Value must be between 0 and 10, your value is ${a}`;
+          }
+        } catch (e) {
+          console.log(e);
+          document.querySelector('.error').innerHTML = e;
+        }
+      };
+
+
+      document.getElementById('btn3').onclick = function () {
+        try {
+          fn1();
+        } catch (e) {
+          console.log(e);
+          switch (e.code) {
+            case 1:
+              console.log(e.message)
+              break;
+
+            case 2:
+              console.log(e.message)
+              break;
+          }
+        }
+      };
+
+      const fn1 = () => {
+        fn2();
+      };
+      const fn2 = () => {
+        fn3();
+      };
+      const fn3 = () => {
+        let a = parseFloat(document.getElementById('inp1').value);
+        if (isNaN(a)) {
+          throw {
+            code: 1,
+            message: `Enter a number`,
+          };
+        }
+        if (a < 0 || a > 10) {
+          throw {
+            code: 2,
+            message: `Value must be between 0 and 10, your value is ${a}`,
+          };
+        }
+      };
+    </script>
+  </body>
+</html>

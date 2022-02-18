@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+    <p id="p6"></p>
+    <p id="p7"></p>
+    <p id="p8"></p>
+    <p id="p9"></p>
+    <p id="p10"></p>
+
+    <script>
+      const st1 = {
+        firstName: 'Mohammad',
+        lastName: 'Moallemi',
+        fullName: function () {
+          return `${this.firstName} ${this.lastName}`;
+        },
+      };
+
+      const st2 = {
+        firstName: 'Mohammad',
+        lastName: 'Amiri',
+        fullName: function () {
+          return `${this.firstName} ${this.lastName}`;
+        },
+      };
+      document.getElementById('p1').innerHTML = st1.fullName();
+      document.getElementById('p2').innerHTML = st2.fullName();
+
+      /********** Object Constructor Function ***********/
+
+      console.log(st2);
+
+      st2.firstname = 'Shervin';
+      st2.fullname = function () {
+        return `${this.lastName}, ${this.firstName}`;
+      };
+
+      console.log(st2);
+      
+      // const Student = function (firstName, lastName) {
+      //   console.log(this);
+      //   this.firstName = firstName;
+      //   console.log(this);
+
+      //   this.lastName = lastName;
+      //   console.log(this);
+        
+      //   this.fullName = function () {
+      //     return `${this.firstName} ${this.lastName}`;
+      //   };
+      //   console.log(this);
+
+      //   // return `${firstName} ${lastName}`;
+      // };
+
+      function Student(firstName, lastName) {
+        this.firstName = firstName
+        this.lastName = lastName
+        this.fullName = function(){
+          return `${this.firstName} ${this.lastName}`;
+        }
+      }
+
+      const st3 = new Student('Behnam', 'Rahimi');
+
+      console.log(st3);
+      document.getElementById('p3').innerHTML = st3.fullName();
+      const st4 = new Student('Tahere', 'Molaei');
+      document.getElementById('p4').innerHTML = st4.fullName();
+
+      /******* Class ********/
+      /*
+				class ClassName {
+          property1 = value1;
+          property2 = value2;
+          property3 = value3;
+          
+          method1(parameters){ ... }
+          method2(parameters){ ... }
+          method3 = (p1, p2, ...) => { .... }
+					
+          constructor(p1, p2, ...){
+						this.property = p1
+					}
+				}
+				let or const
+				const object = new ClassName(parameters)
+				object.property1
+				object.method1()
+    */
+
+      class StudentClass {
+        // firstName = ''
+        // lastName = ''
+        constructor(firstName, lastName) {
+          this.firstName = firstName;
+          this.lastName = lastName;
+        }
+
+        fullName() {
+          return `${this.firstName} ${this.lastName}`;
+        }
+
+      }
+
+      const st5 = new StudentClass('Sina', 'Fakhredin');
+      document.getElementById('p5').innerHTML = st5.fullName();
+
+    </script>
+  </body>
+</html>

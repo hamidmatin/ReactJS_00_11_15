@@ -1,0 +1,7 @@
+<h1>AJAX Introduction</h1>
+<p>AJAX is a developer's dream, because you can:</p>
+<ul>
+  <li class="ajax-info">Read data from a web server - after the page has loaded</li>
+  <li class="ajax-info">Update a web page without reloading the page</li>
+  <li class="ajax-info">Send data to a web server - in the background</li>
+</ul>

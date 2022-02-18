@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn1">Inrement</button>
+    <button id="btn2">change</button>
+    <button id="btn3">Counter Increment</button>
+    <hr />
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3"></p>
+    <p id="p4"></p>
+    <p id="p5"></p>
+    <p id="p6"></p>
+    <p id="p7"></p>
+
+    <script>
+      let counter = 0;
+      document.getElementById('p1').innerHTML = `counter = ${counter}`;
+
+      document.getElementById('btn1').addEventListener('click', () => {
+        add();
+        document.getElementById('p1').innerHTML = `counter = ${counter}`;
+      });
+
+      const add = () => {
+        counter++;
+      };
+
+      document.getElementById('btn2').onclick = () => {
+        let count;
+
+        counter = 50
+
+        /**....*/
+      };
+
+      /*****************/
+
+      const counterInit = function (init) {
+        let myCounter = init;
+
+        const add = () => {
+          myCounter++;
+          console.log(myCounter);
+          return myCounter;
+        };
+
+        // add();
+        // add();
+        // add();
+
+        // return myCounter;
+        return add;
+      };
+
+      // counterInit(10);
+      let increment = counterInit(10);
+      console.log(increment);
+
+      // increment();
+
+      document.getElementById('btn3').onclick = () => {
+        let result = increment();
+        document.getElementById('p2').innerHTML = `my counter = ${result}`;
+      };
+
+      /************ sample *********/
+      const formatCurrency = function (currencySymbol, decimalSeparator) {
+        return value => {
+          const wholePart = Math.trunc(value / 100);
+          let fractionalPart = value % 100;
+          if (fractionalPart < 10) {
+            fractionalPart = '0' + fractionalPart;
+          }
+          return `${currencySymbol}${wholePart}${decimalSeparator}${fractionalPart}`;
+        };
+      };
+
+      const dollarCurrency = formatCurrency('$', '.')
+      const euroCurrency = formatCurrency('€', '.')
+      const rialCurrency = formatCurrency('ریال', '/')
+
+      let price = 1203
+
+      document.getElementById('p3').innerHTML = dollarCurrency(price)
+      document.getElementById('p4').innerHTML = euroCurrency(price)
+      document.getElementById('p5').innerHTML = rialCurrency(price)
+      document.getElementById('p6').innerHTML = dollarCurrency(12354)
+    </script>
+  </body>
+</html>
