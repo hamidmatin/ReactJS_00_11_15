@@ -1,24 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Layout } from "./components/layout";
+import { HomeIndex } from './pages/home'
+import { ReactComponentIndex } from "./pages/tutorial/react-component";
 
 function App() {
+  // console.log(showTeacherInfo())
+  // console.log(FunctionCompnent1())
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout >
+      <HomeIndex />
+      <ReactComponentIndex />     
+    </Layout>
   );
 }
 
