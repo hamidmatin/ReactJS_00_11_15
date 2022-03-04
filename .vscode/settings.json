@@ -1,0 +1,11 @@
+{
+    "files.autoSave": "onWindowChange",
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.jsxSingleQuote": true
+}
