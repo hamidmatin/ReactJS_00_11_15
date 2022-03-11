@@ -23,7 +23,7 @@ export const StateInFunctionComponent = () => {
       <h2>State In Fucntion Components and Events</h2>
       <button onClick={toggleHandler}>Toggle</button>
       <button onClick={changeMessageHandler}>Change Message</button>
-
+      <button onClick={()=>{console.clear()}}>Clear Console</button>
       {isVisible ? (
         <FucntionComponentLifecycle title={message} />
       ) : null}

@@ -1,4 +1,5 @@
 import React from "react";
+import Helmet from "react-helmet";
 
 /******
  * Modules
@@ -25,6 +26,10 @@ import { default as sn } from "../../react-module/my-module";
 export const HomeIndex = () => {
   return (
     <div>
+      <Helmet >
+        <title>React Course in MFT</title>
+        <meta name="description" content="sklhs gslg s g" />
+      </Helmet>
       <h1>{course.name}</h1>
       <h2>Teacher : {showTeacherInfo()}</h2>
       <p>

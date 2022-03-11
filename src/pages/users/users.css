@@ -1,0 +1,19 @@
+.users-card {
+    border: 1px solid #f1f1f1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.411);
+    padding: 8px;
+    margin-bottom: 16px;
+}
+.users-card .user-title {
+    margin: 0;
+    padding: 12px 0;
+    text-align: center;
+}
+.users-card .user-text {
+    margin-bottom: 8px;
+}
+.list-empty {
+    text-align: center;
+    font-style: italic;
+    font-size: 1.5em;
+}

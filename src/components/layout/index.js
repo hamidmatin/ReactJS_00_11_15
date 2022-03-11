@@ -6,7 +6,7 @@ export const Layout = ({ children }) => {
   return (
     <div>
       <Header />
-      <div style={{ width: "80%", margin: "auto" }}>{children}</div>
+      <div className="container" style={{padding: '50px 0'}}>{children}</div>
       <Footer />
     </div>
   );

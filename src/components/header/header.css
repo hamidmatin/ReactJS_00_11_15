@@ -1,0 +1,25 @@
+.header {
+    background-color: beige;
+    padding-top: 20px;
+}
+.header nav {
+    background-color: orangered;
+}
+.header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.header nav a {
+    text-decoration: none;
+    padding: 8px 16px;
+    display: block;
+    color: white;
+}
+.header nav a:hover {
+    background-color: hsl(16, 100%, 70%);
+}
+.header nav a.active {
+    background-color: darkgreen;
+}

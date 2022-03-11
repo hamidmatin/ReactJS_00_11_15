@@ -7,5 +7,6 @@
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "prettier.jsxSingleQuote": true
+    "prettier.jsxSingleQuote": true,
+    "editor.fontSize": 24
 }
