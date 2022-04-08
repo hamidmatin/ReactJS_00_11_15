@@ -9,7 +9,8 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TutorialsIndex } from "./pages/tutorial";
 import { NotFoundIndex } from "./pages/404";
-import { UserInfoIndex } from "./pages/users/user-info";
+import { UserEdit } from './pages/users/user-edit';
+import { UserNew } from './pages/users/user-new';
 function App() {
   // console.log(showTeacherInfo())
   // console.log(FunctionCompnent1())
@@ -24,7 +25,8 @@ function App() {
               path='path/:parameter1/:parameter2'
               path='path/:parameter1/path/:parameter2'
           */}
-          <Route path='users/:id' element={<UserInfoIndex />} />
+          <Route path='users/edit/:id' element={<UserEdit />} />
+          <Route path='users/new' element={<UserNew />} />
 
           <Route path='tutorials' element={<TutorialsIndex />}>
             <Route path='components' element={<ReactComponentIndex />} />

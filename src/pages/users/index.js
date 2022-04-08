@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { UserCard } from "./user-card";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { UserCard } from './user-card';
+import { BASE_URL } from '../../utils/constants';
+import axios from 'axios';
 
-import "./users.css";
+import './users.css';
+import { BasePage } from '../../components/base-page';
+import { Link } from 'react-router-dom';
 
 export const UsersIndex = () => {
-  const [userList, setUserList] = useState([]);
+  const [allUsers, setAllUsers] = useState(null);
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get(BASE_URL + '/users')
       .then((response) => {
         console.log(response);
-        setUserList(response.data);
+        setAllUsers(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -20,15 +23,20 @@ export const UsersIndex = () => {
   }, []);
 
   return (
-    <section>
-      <h2>Users</h2>
-      {userList.length !== 0 ? (
+    <BasePage title={'Users'}>
+      <div className='new-wrapper'>
+        <Link to={`new`} className='icon-button'>
+          <i className='material-icons'>person_add</i>
+        </Link>
+      </div>
+      {allUsers && allUsers.users.length > 0 ? (
         <div className='row'>
-          {userList.map((user) => (
+          {allUsers.users.map((user) => (
             <div key={user.id} className='col-sm-6 col-md-4'>
               <UserCard
                 id={user.id}
-                name={user.name}
+                firstName={user.firstName}
+                lastName={user.lastName}
                 email={user.email}
                 username={user.username}
                 phone={user.phone}
@@ -39,6 +47,6 @@ export const UsersIndex = () => {
       ) : (
         <p className='list-empty'>List is empty</p>
       )}
-    </section>
+    </BasePage>
   );
 };

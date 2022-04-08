@@ -1,5 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
+import { BasePage } from '../../components/base-page';
 
 /******
  * Modules
@@ -25,11 +26,8 @@ import { showTeacherInfo as teacherInfo } from "../../react-module/my-module";
 import { default as sn } from "../../react-module/my-module";
 export const HomeIndex = () => {
   return (
-    <div>
-      <Helmet >
-        <title>React Course in MFT</title>
-        <meta name="description" content="sklhs gslg s g" />
-      </Helmet>
+    <BasePage title={'Home'} description='React Case Study for MFT'>
+      
       <h1>{course.name}</h1>
       <h2>Teacher : {showTeacherInfo()}</h2>
       <p>
@@ -42,6 +40,6 @@ export const HomeIndex = () => {
       <p>Current Session : {currentSession}</p>
       <hr />
       <p>Current Session : {sn}</p>
-    </div>
+    </BasePage>
   );
 };

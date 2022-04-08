@@ -1,0 +1,7 @@
+.page-title {
+  font-size: 36px;
+  margin: 0 0 20px;
+}
+.page-title > span {
+  border-bottom: 3px solid orangered;
+}

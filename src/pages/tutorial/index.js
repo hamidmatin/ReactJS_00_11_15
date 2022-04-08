@@ -1,17 +1,14 @@
 import React from "react";
 import Helmet from "react-helmet";
 import { NavLink, Outlet } from "react-router-dom";
+import { BasePage } from '../../components/base-page';
 
 import "./tutorials.css";
 
 export const TutorialsIndex = () => {
   return (
-    <div>
-      <Helmet>
-        <title>React Course in MFT - Tutorials</title>
-        <meta name='description' content='sklhs gslg s g' />
-      </Helmet>
-      <h2>Tutorials</h2>
+    <BasePage title={'Tutorials'}>
+      
       <div className='tutorials'>
         <aside>
           <nav>
@@ -32,6 +29,6 @@ export const TutorialsIndex = () => {
           <Outlet />
         </main>
       </div>
-    </div>
+    </BasePage>
   );
 };

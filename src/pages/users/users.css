@@ -17,3 +17,7 @@
     font-style: italic;
     font-size: 1.5em;
 }
+.users-card .user-card-footer {
+    display: flex;
+    justify-content: flex-end;
+}

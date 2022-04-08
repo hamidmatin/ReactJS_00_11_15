@@ -157,3 +157,23 @@ code {
   .d-xl-none { display: none !important; }
   .d-xl-block { display: block !important; }
 }
+
+.new-wrapper {
+  display: flex;
+  justify-content: end;
+  padding: 16px 0;
+}
+
+.icon-button {
+  text-decoration: none;
+  color: black;
+  border: none;
+  background-color: transparent;
+  padding: 8px;
+  cursor: pointer;
+  display: inline-block;
+  transition: all .3s;
+}
+.icon-button:hover {
+  background-color: #f1f1f1;
+}
