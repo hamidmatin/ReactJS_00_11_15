@@ -1,0 +1,10 @@
+.pagination {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  background-color: red;
+}

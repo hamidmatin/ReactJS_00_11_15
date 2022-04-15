@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Helmet from "react-helmet";
 import { BasePage } from '../../components/base-page';
 
@@ -24,9 +24,20 @@ import currentSession from "../../react-module/my-module";
 import { showTeacherInfo as teacherInfo } from "../../react-module/my-module";
 
 import { default as sn } from "../../react-module/my-module";
+
+import { withLoading } from '../../HOC/with-loading'
+
 export const HomeIndex = () => {
+  const BasePageWithLoading = withLoading(BasePage)
+
+  const [isLoading, setIsLoading] = useState(true)
+  
+
+  setTimeout(() => {
+    setIsLoading(false)
+  }, 500);
   return (
-    <BasePage title={'Home'} description='React Case Study for MFT'>
+    <BasePageWithLoading isLoading={isLoading} title={'Home'} description='React Case Study for MFT'>
       
       <h1>{course.name}</h1>
       <h2>Teacher : {showTeacherInfo()}</h2>
@@ -39,7 +50,9 @@ export const HomeIndex = () => {
       <h2>Teacher : {teacherInfo()}</h2>
       <p>Current Session : {currentSession}</p>
       <hr />
-      <p>Current Session : {sn}</p>
-    </BasePage>
+      <p>
+        Current Session : {sn}
+      </p>
+    </BasePageWithLoading>
   );
 };

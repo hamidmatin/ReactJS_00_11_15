@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { BasePage } from '../../components/base-page'
+import { withLoading } from '../../HOC/with-loading';
 import { BASE_URL } from '../../utils/constants';
 import { UserForm } from './user-form'
 
@@ -9,11 +10,15 @@ export const UserEdit = () => {
   const navigate = useNavigate()
   const { id } = useParams();
   const [userInfo, setUserInfo] = useState(null)
+  const [isLoading, setIsLoading] = useState(true);
+
+  const BasePageWithLoading = withLoading(BasePage)
 
   useEffect(()=>{
     axios.get(`${BASE_URL}/users/${id}`)
       .then(result => {
         setUserInfo(result.data)
+        setIsLoading(false)
       })
   }, [id])
 
@@ -27,8 +32,8 @@ export const UserEdit = () => {
       })
   }
   return (
-    <BasePage title={'Edit User'}>
+    <BasePageWithLoading isLoading={isLoading} title={'Edit User'}>
       <UserForm user={userInfo} onSave={updateUser}/>
-    </BasePage>
+    </BasePageWithLoading>
   )
 }

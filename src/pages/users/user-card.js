@@ -7,6 +7,7 @@ export const UserCard = ({ id, firstName, lastName, username, email, phone }) =>
       <h3 className='user-title'>
         {firstName} {lastName}
       </h3>
+      <div className='user-text'>ID : {id}</div>
       <div className='user-text'>User Name : {username}</div>
       <div className='user-text'>E-Mail : {email}</div>
       <div className='user-text'>Phone : {phone}</div>
