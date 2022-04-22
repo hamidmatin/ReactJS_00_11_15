@@ -1,0 +1,2 @@
+export const CHANGE_MESSAGE = 'CHANGE_MESSAGE'
+export const UPDATE_MESSAGE = 'UPDATE_MESSAGE'

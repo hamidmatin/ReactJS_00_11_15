@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Helmet from "react-helmet";
 import { BasePage } from '../../components/base-page';
-
 /******
  * Modules
  *    import defaultVariable, {variable,...} from 'module'
@@ -53,6 +51,7 @@ export const HomeIndex = () => {
       <p>
         Current Session : {sn}
       </p>
+      
     </BasePageWithLoading>
   );
 };

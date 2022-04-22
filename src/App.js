@@ -11,6 +11,9 @@ import { TutorialsIndex } from "./pages/tutorial";
 import { NotFoundIndex } from "./pages/404";
 import { UserEdit } from './pages/users/user-edit';
 import { UserNew } from './pages/users/user-new';
+import { UsingImage } from './pages/tutorial/using-image';
+import { UsingRedux } from './pages/tutorial/using-redux';
+import { UsingContext } from './pages/tutorial/using-context';
 function App() {
   // console.log(showTeacherInfo())
   // console.log(FunctionCompnent1())
@@ -32,6 +35,9 @@ function App() {
             <Route path='components' element={<ReactComponentIndex />} />
             <Route path='state-cc' element={<StateInClassComponent />} />
             <Route path='state-fc' element={<StateInFunctionComponent />} />
+            <Route path='using-image' element={<UsingImage />} />
+            <Route path='using-redux' element={<UsingRedux />} />
+            <Route path='using-context' element={<UsingContext />} />
           </Route>
 
 

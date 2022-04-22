@@ -22,6 +22,15 @@ export const TutorialsIndex = () => {
               <li>
                 <NavLink to='state-fc'>State In Function Components</NavLink>
               </li>
+              <li>
+                <NavLink to='using-image'>Using Image</NavLink>
+              </li>
+              <li>
+                <NavLink to='using-redux'>Using Redux</NavLink>
+              </li>
+              <li>
+                <NavLink to='using-context'>Using Context</NavLink>
+              </li>
             </ul>
           </nav>
         </aside>
